@@ -10,8 +10,12 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@react-navigation/native": "false6.0.11",
+    "@react-navigation/native-stack": "false6.7.0",
     "react": "18.0.0",
-    "react-native": "0.69.0"
+    "react-native": "0.69.0",
+    "react-native-safe-area-context": "false4.3.1",
+    "react-native-screens": "false3.15.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
