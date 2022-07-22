@@ -1,7 +1,9 @@
 import React, {ReactNode} from 'react';
 import {StyleProp, StyleSheet, View, ViewProps, ViewStyle} from 'react-native';
+import {MarginPaddingProps} from './types';
+import {createMarginPaddingObj} from './utils';
 
-export interface IBlock extends ViewProps {
+export interface IBlock extends ViewProps, MarginPaddingProps {
   children?: ReactNode;
   flex?: ViewStyle['flex'];
   color?: ViewStyle['backgroundColor'];
@@ -9,16 +11,6 @@ export interface IBlock extends ViewProps {
   justify?: ViewStyle['justifyContent'];
   row?: boolean;
   style?: StyleProp<ViewStyle>;
-  margin?: ViewStyle['margin'];
-  marginTop?: ViewStyle['marginTop'];
-  marginBottom?: ViewStyle['marginBottom'];
-  marginVertical?: ViewStyle['marginVertical'];
-  marginHorizontal?: ViewStyle['marginHorizontal'];
-  padding?: ViewStyle['padding'];
-  paddingTop?: ViewStyle['paddingTop'];
-  paddingBottom?: ViewStyle['paddingBottom'];
-  paddingVertical?: ViewStyle['paddingVertical'];
-  paddingHorizontal?: ViewStyle['paddingHorizontal'];
 }
 
 const Block = ({
@@ -29,16 +21,6 @@ const Block = ({
   justify,
   row,
   style,
-  margin,
-  marginTop,
-  marginBottom,
-  marginVertical,
-  marginHorizontal,
-  padding,
-  paddingTop,
-  paddingBottom,
-  paddingVertical,
-  paddingHorizontal,
   ...props
 }: IBlock) => {
   const blockStyle = StyleSheet.flatten([
@@ -47,18 +29,9 @@ const Block = ({
     align !== undefined && {alignItems: align},
     justify !== undefined && {justifyContent: justify},
     row !== undefined && {flexDirection: 'row'},
-    margin !== undefined && {margin},
-    marginTop !== undefined && {marginTop},
-    marginBottom !== undefined && {marginBottom},
-    marginVertical !== undefined && {marginVertical},
-    marginHorizontal !== undefined && {marginHorizontal},
-    padding !== undefined && {padding},
-    paddingTop !== undefined && {paddingTop},
-    paddingBottom !== undefined && {paddingBottom},
-    paddingVertical !== undefined && {paddingVertical},
-    paddingHorizontal !== undefined && {paddingHorizontal},
+    createMarginPaddingObj(props),
     style,
-  ]);
+  ]) as ViewStyle;
   return (
     <View style={blockStyle} {...props}>
       {children}

@@ -8,23 +8,15 @@ import {
 } from 'react-native';
 import Text from './Text';
 import {useTheme} from '..';
+import {MarginPaddingProps} from './types';
+import {createMarginPaddingObj} from './utils';
 
-interface IButton extends PressableProps {
+interface IButton extends PressableProps, MarginPaddingProps {
   mode?: 'text' | 'outlined' | 'contained';
   uppercase?: boolean;
   children?: ReactNode;
   color?: ViewStyle['backgroundColor'];
   radius?: ViewStyle['borderRadius'];
-  padding?: ViewStyle['padding'];
-  paddingTop?: ViewStyle['paddingTop'];
-  paddingVertical?: ViewStyle['paddingVertical'];
-  paddingBottom?: ViewStyle['paddingBottom'];
-  paddingHorizontal?: ViewStyle['paddingHorizontal'];
-  margin?: ViewStyle['margin'];
-  marginTop?: ViewStyle['marginTop'];
-  marginVertical?: ViewStyle['marginVertical'];
-  marginBottom?: ViewStyle['marginBottom'];
-  marginHorizontal?: ViewStyle['marginHorizontal'];
   style?: StyleProp<ViewStyle>;
 }
 
@@ -32,18 +24,8 @@ const Button = ({
   children,
   color,
   radius,
-  padding,
-  paddingTop,
-  paddingVertical,
-  paddingBottom,
-  paddingHorizontal,
-  margin,
-  marginTop,
-  marginVertical,
-  marginBottom,
-  marginHorizontal,
   uppercase,
-  mode,
+  mode = 'contained',
   style,
   ...props
 }: IButton) => {
@@ -51,16 +33,7 @@ const Button = ({
   const buttonStyle = StyleSheet.flatten([
     color !== undefined && {backgroundColor: color},
     radius !== undefined && {borderRadius: radius},
-    padding !== undefined && {padding},
-    paddingHorizontal !== undefined && {paddingHorizontal},
-    paddingBottom !== undefined && {paddingBottom},
-    paddingTop !== undefined && {paddingTop},
-    paddingVertical !== undefined && {paddingVertical},
-    margin !== undefined && {margin},
-    marginHorizontal !== undefined && {marginHorizontal},
-    marginBottom !== undefined && {marginBottom},
-    marginTop !== undefined && {marginTop},
-    marginVertical !== undefined && {marginVertical},
+    createMarginPaddingObj(props),
     style,
   ]);
 
@@ -113,6 +86,7 @@ const Button = ({
     <Pressable style={[stylesBasedOnMode, buttonStyle]} {...props}>
       <Text
         bt1
+        align="center"
         color={textStylesBasedOnMode?.color || color}
         textTransform={uppercase ? 'uppercase' : 'none'}
         numberOfLines={1}

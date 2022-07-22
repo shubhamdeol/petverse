@@ -77,8 +77,6 @@ const configureFonts = (config = {}) => {
     },
   };
   const fonts = Platform.select({...fontConfig, ...config}) as Fonts;
-  console.log(fonts);
-
   return fonts;
 };
 

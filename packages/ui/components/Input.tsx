@@ -1,52 +1,61 @@
 import React from 'react';
-import {StyleSheet, TextInput, TextInputProps, TextStyle} from 'react-native';
+import {StyleSheet, TextInput, TextInputProps} from 'react-native';
+import {useTheme} from '..';
+import Block from './Block';
+import Text from './Text';
+import {MarginPaddingProps} from './types';
+import {createMarginPaddingObj} from './utils';
 
-interface IInput extends TextInputProps {
-  padding?: TextStyle['padding'];
-  paddingTop?: TextStyle['paddingTop'];
-  paddingVertical?: TextStyle['paddingVertical'];
-  paddingBottom?: TextStyle['paddingBottom'];
-  paddingHorizontal?: TextStyle['paddingHorizontal'];
-  margin?: TextStyle['margin'];
-  marginTop?: TextStyle['marginTop'];
-  marginVertical?: TextStyle['marginVertical'];
-  marginBottom?: TextStyle['marginBottom'];
-  marginHorizontal?: TextStyle['marginHorizontal'];
+interface IInput extends TextInputProps, MarginPaddingProps {
+  label: string;
+  placeholder?: string;
+  errorMessage?: string;
 }
 
 const Input = ({
   children,
-  padding,
-  paddingTop,
-  paddingVertical,
-  paddingBottom,
-  paddingHorizontal,
-  margin,
-  marginTop,
-  marginVertical,
-  marginBottom,
-  marginHorizontal,
-  style,
+  label,
+  placeholder,
+  errorMessage,
   ...props
 }: IInput) => {
-  const blockStyle = StyleSheet.flatten([
-    padding !== undefined && {padding},
-    paddingHorizontal !== undefined && {paddingHorizontal},
-    paddingBottom !== undefined && {paddingBottom},
-    paddingTop !== undefined && {paddingTop},
-    paddingVertical !== undefined && {paddingVertical},
-    margin !== undefined && {margin},
-    marginHorizontal !== undefined && {marginHorizontal},
-    marginBottom !== undefined && {marginBottom},
-    marginTop !== undefined && {marginTop},
-    marginVertical !== undefined && {marginVertical},
-    style,
-  ]);
+  const {colors, fonts} = useTheme();
+  const blockStyle = StyleSheet.flatten([createMarginPaddingObj(props)]);
+
+  const hasError = Boolean(errorMessage);
   return (
-    <TextInput style={blockStyle} {...props}>
-      {children}
-    </TextInput>
+    <Block>
+      <Text s3 color={colors.textMedium}>
+        {label}
+      </Text>
+      <TextInput
+        selectionColor={colors.iconPrimary}
+        placeholder={placeholder || label}
+        style={[
+          styles.input,
+          {
+            borderColor: hasError ? colors.textError : colors.borderOutline,
+            ...fonts.medium,
+            color: colors.textHigh,
+          },
+          blockStyle,
+        ]}
+        {...props}>
+        {children}
+      </TextInput>
+      <Text align="right" c1 color={colors.textError} pt={8} pb={8}>
+        {errorMessage}
+      </Text>
+    </Block>
   );
 };
 
 export default Input;
+
+const styles = StyleSheet.create({
+  input: {
+    borderBottomWidth: 1,
+    fontSize: 16,
+    paddingVertical: 8,
+  },
+});

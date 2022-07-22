@@ -1,14 +1,16 @@
 import React, {ReactNode} from 'react';
 import {StyleSheet, Text as RNText, TextProps, TextStyle} from 'react-native';
 import {useTheme} from '..';
+import {MarginPaddingProps} from './types';
+import {createMarginPaddingObj} from './utils';
 
-interface IText extends TextStyle, TextProps {
+interface IText extends TextProps, MarginPaddingProps {
   children?: ReactNode;
+  flex?: number;
   h1?: boolean;
   h2?: boolean;
   h3?: boolean;
   h4?: boolean;
-  p?: boolean;
   s1?: boolean;
   s2?: boolean;
   s3?: boolean;
@@ -19,16 +21,7 @@ interface IText extends TextStyle, TextProps {
   size?: TextStyle['fontSize'];
   color?: TextStyle['color'];
   align?: TextStyle['textAlign'];
-  padding?: TextStyle['padding'];
-  paddingTop?: TextStyle['paddingTop'];
-  paddingVertical?: TextStyle['paddingVertical'];
-  paddingBottom?: TextStyle['paddingBottom'];
-  paddingHorizontal?: TextStyle['paddingHorizontal'];
-  margin?: TextStyle['margin'];
-  marginTop?: TextStyle['marginTop'];
-  marginVertical?: TextStyle['marginVertical'];
-  marginBottom?: TextStyle['marginBottom'];
-  marginHorizontal?: TextStyle['marginHorizontal'];
+  textTransform?: TextStyle['textTransform'];
 }
 
 const Text = ({
@@ -48,20 +41,11 @@ const Text = ({
   c2,
   bt1,
   align,
-  padding,
-  paddingTop,
-  paddingVertical,
-  paddingBottom,
-  paddingHorizontal,
-  margin,
-  marginTop,
-  marginVertical,
-  marginBottom,
-  marginHorizontal,
   textTransform,
   ...props
 }: IText) => {
   const {fonts, colors} = useTheme();
+
   const textStyle = StyleSheet.flatten([
     {fontSize: 16},
     bt1 !== undefined && {fontSize: 16, ...fonts.medium},
@@ -79,20 +63,11 @@ const Text = ({
     align !== undefined && {textAlign: align},
     color !== undefined && {color: color || colors.textHigh},
     size !== undefined && {fontSize: size},
-    padding !== undefined && {padding},
     textTransform !== undefined && {textTransform},
-    paddingHorizontal !== undefined && {paddingHorizontal},
-    paddingBottom !== undefined && {paddingBottom},
-    paddingTop !== undefined && {paddingTop},
-    paddingVertical !== undefined && {paddingVertical},
-    margin !== undefined && {margin},
-    marginHorizontal !== undefined && {marginHorizontal},
-    marginBottom !== undefined && {marginBottom},
-    marginTop !== undefined && {marginTop},
-    marginVertical !== undefined && {marginVertical},
+    createMarginPaddingObj(props),
   ]) as TextStyle;
   return (
-    <RNText style={textStyle} {...props}>
+    <RNText style={[textStyle]} {...props}>
       {children}
     </RNText>
   );

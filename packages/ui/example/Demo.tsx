@@ -1,46 +1,46 @@
-import {Text, AppUIProvider, Block, Button} from 'bad-ui';
+import {Text, AppUIProvider, Block, Button, Input} from 'bad-ui';
 import React from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, StyleSheet} from 'react-native';
 
 const BadUIDemoShowCase = () => {
-  const [elementType, setElementType] = React.useState<'button' | 'text'>(
-    'button',
-  );
+  const [elementType, setElementType] = React.useState<
+    'button' | 'text' | 'input'
+  >();
 
   const renderTextComponents = () => {
     return (
       <>
-        <Text marginTop={40} bt1>
+        <Text mt={40} bt1>
           Text Bt1
         </Text>
-        <Text marginTop={40} h1>
+        <Text mt={40} h1>
           Text H1
         </Text>
-        <Text marginTop={40} h2>
+        <Text mt={40} h2>
           Text H2
         </Text>
-        <Text marginTop={40} h3>
+        <Text mt={40} h3>
           Text H3
         </Text>
-        <Text marginTop={40} h4>
+        <Text mt={40} h4>
           Text H4
         </Text>
-        <Text marginTop={40} s1>
+        <Text mt={40} s1>
           Text S1
         </Text>
-        <Text marginTop={40} s2>
+        <Text mt={40} s2>
           Text S2
         </Text>
-        <Text marginTop={40} s3>
+        <Text mt={40} s3>
           Text S3
         </Text>
-        <Text marginTop={40} s4>
+        <Text mt={40} s4>
           Text S4
         </Text>
-        <Text marginTop={40} c1>
+        <Text mt={40} c1>
           Text C1
         </Text>
-        <Text marginTop={40} c2>
+        <Text mt={40} c2>
           Text C2
         </Text>
       </>
@@ -50,13 +50,30 @@ const BadUIDemoShowCase = () => {
   const renderButtonComponents = () => {
     return (
       <>
-        <Button mode="contained">Button Contained</Button>
-        <Button marginTop={50} mode="outlined">
+        <Button mt={50} mode="contained">
+          Button Contained
+        </Button>
+        <Button mt={50} mode="outlined">
           Button Outlined
         </Button>
-        <Button marginTop={50} mode="text">
+        <Button mt={50} mode="text">
           Button Text
         </Button>
+      </>
+    );
+  };
+
+  const renderInputComponents = () => {
+    return (
+      <>
+        <Input label="User Name" placeholder="Tonny" />
+        <Input
+          label="Email"
+          placeholder="xxxx@gmail.com"
+          errorMessage="Email not valid"
+        />
+        <Input label="Password" secureTextEntry placeholder="*******" />
+        <Button>Submit</Button>
       </>
     );
   };
@@ -67,13 +84,24 @@ const BadUIDemoShowCase = () => {
         return renderTextComponents();
       case 'button':
         return renderButtonComponents();
+      case 'input':
+        return renderInputComponents();
       default:
         break;
     }
   };
   return (
-    <Block flex={1} justify="center" align="center">
-      {renderContent()}
+    <Block flex={1} justify="center" paddingHorizontal={16}>
+      <Button onPress={() => setElementType(undefined)}>Reset</Button>
+      {elementType ? (
+        renderContent()
+      ) : (
+        <>
+          <Button onPress={() => setElementType('text')}>Text</Button>
+          <Button onPress={() => setElementType('button')}>Button</Button>
+          <Button onPress={() => setElementType('input')}>input</Button>
+        </>
+      )}
     </Block>
   );
 };
