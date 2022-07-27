@@ -1,5 +1,6 @@
 import React, {ReactNode} from 'react';
 import {StyleProp, StyleSheet, View, ViewProps, ViewStyle} from 'react-native';
+import {useTheme} from '../ThemeContext';
 import {MarginPaddingProps} from './types';
 import {createMarginPaddingObj} from './utils';
 
@@ -23,13 +24,14 @@ const Block = ({
   style,
   ...props
 }: IBlock) => {
+  const {spacing} = useTheme();
   const blockStyle = StyleSheet.flatten([
     flex !== undefined && {flex},
     color !== undefined && {backgroundColor: color},
     align !== undefined && {alignItems: align},
     justify !== undefined && {justifyContent: justify},
     row !== undefined && {flexDirection: 'row'},
-    createMarginPaddingObj(props),
+    createMarginPaddingObj(props, spacing),
     style,
   ]) as ViewStyle;
   return (

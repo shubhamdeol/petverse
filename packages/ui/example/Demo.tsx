@@ -10,37 +10,37 @@ const BadUIDemoShowCase = () => {
   const renderTextComponents = () => {
     return (
       <>
-        <Text mt={40} bt1>
+        <Text mt="l" bt1>
           Text Bt1
         </Text>
-        <Text mt={40} h1>
+        <Text mt="l" h1>
           Text H1
         </Text>
-        <Text mt={40} h2>
+        <Text mt="l" h2>
           Text H2
         </Text>
-        <Text mt={40} h3>
+        <Text mt="l" h3>
           Text H3
         </Text>
-        <Text mt={40} h4>
+        <Text mt="l" h4>
           Text H4
         </Text>
-        <Text mt={40} s1>
+        <Text mt="l" s1>
           Text S1
         </Text>
-        <Text mt={40} s2>
+        <Text mt="l" s2>
           Text S2
         </Text>
-        <Text mt={40} s3>
+        <Text mt="l" s3>
           Text S3
         </Text>
-        <Text mt={40} s4>
+        <Text mt="l" s4>
           Text S4
         </Text>
-        <Text mt={40} c1>
+        <Text mt="l" c1>
           Text C1
         </Text>
-        <Text mt={40} c2>
+        <Text mt="l" c2>
           Text C2
         </Text>
       </>
@@ -50,13 +50,13 @@ const BadUIDemoShowCase = () => {
   const renderButtonComponents = () => {
     return (
       <>
-        <Button mt={50} mode="contained">
+        <Button mt="l" mode="contained">
           Button Contained
         </Button>
-        <Button mt={50} mode="outlined">
+        <Button mt="l" mode="outlined">
           Button Outlined
         </Button>
-        <Button mt={50} mode="text">
+        <Button mt="l" mode="text">
           Button Text
         </Button>
       </>
@@ -91,15 +91,21 @@ const BadUIDemoShowCase = () => {
     }
   };
   return (
-    <Block flex={1} justify="center" paddingHorizontal={16}>
+    <Block flex={1} justify="center" ph="m">
       <Button onPress={() => setElementType(undefined)}>Reset</Button>
       {elementType ? (
         renderContent()
       ) : (
         <>
-          <Button onPress={() => setElementType('text')}>Text</Button>
-          <Button onPress={() => setElementType('button')}>Button</Button>
-          <Button onPress={() => setElementType('input')}>input</Button>
+          <Button mv="s" mode="outlined" onPress={() => setElementType('text')}>
+            Text
+          </Button>
+          <Button mv="s" onPress={() => setElementType('button')}>
+            Button
+          </Button>
+          <Button mv="s" onPress={() => setElementType('input')}>
+            input
+          </Button>
         </>
       )}
     </Block>

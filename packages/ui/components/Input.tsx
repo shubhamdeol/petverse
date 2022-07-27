@@ -19,8 +19,10 @@ const Input = ({
   errorMessage,
   ...props
 }: IInput) => {
-  const {colors, fonts} = useTheme();
-  const blockStyle = StyleSheet.flatten([createMarginPaddingObj(props)]);
+  const {colors, fonts, spacing} = useTheme();
+  const blockStyle = StyleSheet.flatten([
+    createMarginPaddingObj(props, spacing),
+  ]);
 
   const hasError = Boolean(errorMessage);
   return (

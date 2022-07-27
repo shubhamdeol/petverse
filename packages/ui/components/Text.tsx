@@ -44,7 +44,7 @@ const Text = ({
   textTransform,
   ...props
 }: IText) => {
-  const {fonts, colors} = useTheme();
+  const {fonts, colors, spacing} = useTheme();
 
   const textStyle = StyleSheet.flatten([
     {fontSize: 16},
@@ -64,7 +64,7 @@ const Text = ({
     color !== undefined && {color: color || colors.textHigh},
     size !== undefined && {fontSize: size},
     textTransform !== undefined && {textTransform},
-    createMarginPaddingObj(props),
+    createMarginPaddingObj(props, spacing),
   ]) as TextStyle;
   return (
     <RNText style={[textStyle]} {...props}>

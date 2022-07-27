@@ -29,11 +29,11 @@ const Button = ({
   style,
   ...props
 }: IButton) => {
-  const {colors} = useTheme();
+  const {colors, spacing} = useTheme();
   const buttonStyle = StyleSheet.flatten([
     color !== undefined && {backgroundColor: color},
     radius !== undefined && {borderRadius: radius},
-    createMarginPaddingObj(props),
+    createMarginPaddingObj(props, spacing),
     style,
   ]);
 

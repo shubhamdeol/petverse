@@ -1,7 +1,8 @@
 import React from 'react';
 import {Platform} from 'react-native';
 
-import {Colors} from './index';
+import Colors from './Colors';
+import {spacing} from './components/constants';
 
 export type Font = {
   fontFamily: string;
@@ -145,6 +146,7 @@ const defaultTheme = {
     textWarning: Colors.brown60,
   },
   fonts: configureFonts(),
+  spacing: spacing,
 };
 
 const darkTheme = {

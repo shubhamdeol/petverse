@@ -1,12 +1,16 @@
+import {spacing} from './constants';
+
+export type Spacing = typeof spacing;
+
 export interface MarginPaddingProps {
-  p?: number | undefined;
-  pt?: number | undefined;
-  pv?: number | undefined;
-  pb?: number | undefined;
-  ph?: number | undefined;
-  m?: number | undefined;
-  mt?: number | undefined;
-  mv?: number | undefined;
-  mb?: number | undefined;
-  mh?: number | undefined;
+  p?: keyof Spacing | undefined;
+  pt?: keyof Spacing | undefined;
+  pv?: keyof Spacing | undefined;
+  pb?: keyof Spacing | undefined;
+  ph?: keyof Spacing | undefined;
+  m?: keyof Spacing | undefined;
+  mt?: keyof Spacing | undefined;
+  mv?: keyof Spacing | undefined;
+  mb?: keyof Spacing | undefined;
+  mh?: keyof Spacing | undefined;
 }
