@@ -73,7 +73,6 @@ const BadUIDemoShowCase = () => {
           errorMessage="Email not valid"
         />
         <Input label="Password" secureTextEntry placeholder="*******" />
-        <Button>Submit</Button>
       </>
     );
   };
@@ -91,23 +90,30 @@ const BadUIDemoShowCase = () => {
     }
   };
   return (
-    <Block flex={1} justify="center" ph="m">
-      <Button onPress={() => setElementType(undefined)}>Reset</Button>
-      {elementType ? (
-        renderContent()
-      ) : (
-        <>
-          <Button mv="s" mode="outlined" onPress={() => setElementType('text')}>
-            Text
-          </Button>
-          <Button mv="s" onPress={() => setElementType('button')}>
-            Button
-          </Button>
-          <Button mv="s" onPress={() => setElementType('input')}>
-            input
-          </Button>
-        </>
+    <Block flex={1}>
+      {!!elementType && (
+        <Button onPress={() => setElementType(undefined)}>Back</Button>
       )}
+      <Block flex={1} justify="center" ph="m">
+        {elementType ? (
+          renderContent()
+        ) : (
+          <>
+            <Button
+              mv="s"
+              mode="outlined"
+              onPress={() => setElementType('text')}>
+              Text
+            </Button>
+            <Button mv="s" onPress={() => setElementType('button')}>
+              Button
+            </Button>
+            <Button mv="s" onPress={() => setElementType('input')}>
+              Input
+            </Button>
+          </>
+        )}
+      </Block>
     </Block>
   );
 };

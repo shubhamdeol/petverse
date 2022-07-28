@@ -1,15 +1,14 @@
 import React from 'react';
-import useTheme from '../hooks/useTheme';
-import {Block, Input, Text} from '../ui';
+import {Block, Input, Text} from 'bad-ui';
 
 function Home() {
   // const  = useTheme();
   return (
-    <Block marginTop={50} align="center" justify="center">
+    <Block mt="l" align="center" justify="center">
       <Text>Login Screen</Text>
-      <Input placeholder="how u doing" margin={20} padding={20} />
-      <Input placeholder="how u doing" margin={20} padding={20} />
-      <Input placeholder="how u doing" margin={20} padding={20} />
+      <Input label="how u doing" m="l" p="l" />
+      <Input label="how u doing" m="l" p="l" />
+      <Input label="how u doing" m="l" p="l" />
     </Block>
   );
 }
