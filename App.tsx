@@ -1,8 +1,8 @@
 import React from 'react';
-import {useColorScheme} from 'react-native';
+import {SafeAreaView, useColorScheme, StyleSheet} from 'react-native';
 
-// import {NavigationRoot} from './src/navigation';
-import {Block, Demo} from 'bad-ui';
+import {AppUIProvider} from 'bad-ui';
+import {NavigationRoot} from './src/navigation';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -12,10 +12,21 @@ const App = () => {
   // };
 
   return (
-    <Block flex={1}>
-      <Demo />
-    </Block>
+    <AppUIProvider
+      theme={{
+        dark: isDarkMode,
+      }}>
+      <SafeAreaView style={styles.safeAreaView}>
+        <NavigationRoot />
+      </SafeAreaView>
+    </AppUIProvider>
   );
 };
 
 export default App;
+
+const styles = StyleSheet.create({
+  safeAreaView: {
+    flex: 1,
+  },
+});

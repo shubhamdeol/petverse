@@ -81,7 +81,7 @@ const configureFonts = (config = {}) => {
   return fonts;
 };
 
-const defaultTheme = {
+export const defaultTheme = {
   dark: false,
   colors: {
     background1: Colors.grey10,
@@ -149,7 +149,7 @@ const defaultTheme = {
   spacing: spacing,
 };
 
-const darkTheme = {
+export const darkTheme = {
   dark: true,
   colors: {
     background1: Colors['darkWhite-5'],
